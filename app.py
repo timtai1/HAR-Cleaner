@@ -10,9 +10,27 @@ import tempfile
 from urllib.parse import urlparse
 from collections import defaultdict
 import io
+import glob
+import time
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB max upload
+
+def cleanup_old_temp_files(max_age_hours=24):
+    """Clean up temporary HAR files older than max_age_hours."""
+    temp_dir = tempfile.gettempdir()
+    pattern = os.path.join(temp_dir, 'har_*.json')
+    current_time = time.time()
+    max_age_seconds = max_age_hours * 3600
+
+    for filepath in glob.glob(pattern):
+        try:
+            file_age = current_time - os.path.getmtime(filepath)
+            if file_age > max_age_seconds:
+                os.remove(filepath)
+                print(f"Cleaned up old temp file: {filepath}")
+        except Exception as e:
+            print(f"Error cleaning up {filepath}: {e}")
 
 def get_fqdn(url):
     """Extracts the hostname (FQDN) from a given URL."""
@@ -120,6 +138,9 @@ def upload_file():
         return jsonify({'error': 'File must be a .har file'}), 400
 
     try:
+        # Clean up old temp files (older than 24 hours)
+        cleanup_old_temp_files(24)
+
         # Read and parse HAR file
         har_content = file.read().decode('utf-8')
         har_data = json.loads(har_content)
@@ -146,12 +167,21 @@ def upload_file():
         # Store in a temporary file
         temp_dir = tempfile.gettempdir()
         temp_path = os.path.join(temp_dir, f'har_{session_id}.json')
+
+        # Also store the original filename
+        original_filename = file.filename
+        metadata = {
+            'har_data': har_data,
+            'original_filename': original_filename
+        }
+
         with open(temp_path, 'w', encoding='utf-8') as f:
-            json.dump(har_data, f)
+            json.dump(metadata, f)
 
         return jsonify({
             'success': True,
             'session_id': session_id,
+            'original_filename': original_filename,
             'fqdn_data': fqdn_list,
             'total_entries': len(har_data.get('log', {}).get('entries', []))
         })
@@ -167,6 +197,7 @@ def export_file():
     data = request.get_json()
     session_id = data.get('session_id')
     selected_indices = data.get('selected_indices', [])
+    original_filename = data.get('original_filename', 'file.har')
 
     if not session_id or not selected_indices:
         return jsonify({'error': 'Missing session_id or selected_indices'}), 400
@@ -180,7 +211,17 @@ def export_file():
             return jsonify({'error': 'Session expired or invalid'}), 400
 
         with open(temp_path, 'r', encoding='utf-8') as f:
-            har_data = json.load(f)
+            metadata = json.load(f)
+
+        # Extract HAR data and original filename
+        har_data = metadata.get('har_data')
+        stored_filename = metadata.get('original_filename', original_filename)
+
+        # Generate cleaned filename
+        if stored_filename.endswith('.har'):
+            cleaned_filename = stored_filename[:-4] + '_cleaned.har'
+        else:
+            cleaned_filename = stored_filename + '_cleaned.har'
 
         # Create cleaned HAR
         cleaned_har, removed_count = create_cleaned_har(har_data, selected_indices)
@@ -197,15 +238,15 @@ def export_file():
                 'message': f'Warning: File size is {file_size_mb:.2f}MB, which exceeds the 20MB limit for Invicti scanner. Please remove more URLs.'
             }), 200
 
-        # Clean up temporary file
-        os.remove(temp_path)
+        # Note: We don't delete the temp file here to allow multiple exports
+        # The temp file will be cleaned up by the system or can be manually deleted
 
         # Send file
         return send_file(
             io.BytesIO(json_bytes),
             mimetype='application/json',
             as_attachment=True,
-            download_name='cleaned.har'
+            download_name=cleaned_filename
         )
 
     except Exception as e:
@@ -230,7 +271,10 @@ def check_size():
             return jsonify({'error': 'Session expired or invalid'}), 400
 
         with open(temp_path, 'r', encoding='utf-8') as f:
-            har_data = json.load(f)
+            metadata = json.load(f)
+
+        # Extract HAR data
+        har_data = metadata.get('har_data')
 
         # Create cleaned HAR
         cleaned_har, removed_count = create_cleaned_har(har_data, selected_indices)

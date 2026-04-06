@@ -1,11 +1,13 @@
 // HAR Cleaner Web App - Client-side Logic
 
 let sessionId = null;
+let originalFilename = null;
 let fqdnData = [];
 let allURLs = [];
 let filteredURLs = [];
 let currentPage = 1;
 let pageSize = 50;
+let selectedURLIndices = new Set(); // Track which URLs are selected
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -81,6 +83,7 @@ function uploadFile(file) {
         } else {
             // Success
             sessionId = data.session_id;
+            originalFilename = data.original_filename;
             fqdnData = data.fqdn_data;
 
             document.getElementById('progressBar').style.width = '100%';
@@ -164,6 +167,10 @@ function proceedToURLs() {
     // Sort by size (descending)
     allURLs.sort((a, b) => b.size - a.size);
 
+    // Initialize all URLs as selected
+    selectedURLIndices.clear();
+    allURLs.forEach(url => selectedURLIndices.add(url.index));
+
     // Show Step 3
     document.getElementById('step2').classList.add('d-none');
     document.getElementById('step3').classList.remove('d-none');
@@ -177,23 +184,30 @@ function renderURLList() {
     const urlList = document.getElementById('urlList');
     urlList.innerHTML = '';
 
-    document.getElementById('totalURLs').textContent = filteredURLs.length;
+    // Always show total count of all URLs, not just filtered
+    document.getElementById('totalURLs').textContent = allURLs.length;
 
     // Pagination
     const startIndex = pageSize === 'all' ? 0 : (currentPage - 1) * parseInt(pageSize);
     const endIndex = pageSize === 'all' ? filteredURLs.length : startIndex + parseInt(pageSize);
     const paginatedURLs = filteredURLs.slice(startIndex, endIndex);
 
+    // Update page URL count
+    document.getElementById('pageURLs').textContent = paginatedURLs.length;
+
     paginatedURLs.forEach(url => {
         const sizeKB = (url.size / 1024).toFixed(2);
         const sizeMB = (url.size / (1024 * 1024)).toFixed(2);
         const sizeDisplay = url.size > 1024 * 1024 ? `${sizeMB} MB` : `${sizeKB} KB`;
 
+        // Check if this URL is selected
+        const isSelected = selectedURLIndices.has(url.index);
+
         const div = document.createElement('div');
         div.className = 'url-item';
         div.innerHTML = `
-            <input type="checkbox" class="url-checkbox" value="${url.index}" checked
-                   onchange="updateURLSelection()">
+            <input type="checkbox" class="url-checkbox" value="${url.index}" ${isSelected ? 'checked' : ''}
+                   onchange="handleURLCheckboxChange(this)">
             <div class="url-info">
                 <div class="url-text">
                     <span class="method-badge method-${url.method}">${url.method}</span>
@@ -311,19 +325,53 @@ function filterURLs() {
     renderURLList();
 }
 
+function handleURLCheckboxChange(checkbox) {
+    const index = parseInt(checkbox.value);
+    if (checkbox.checked) {
+        selectedURLIndices.add(index);
+    } else {
+        selectedURLIndices.delete(index);
+    }
+    updateURLSelection();
+}
+
 function selectAllURLs() {
+    // Add ALL URLs to selection (regardless of page or filter)
+    allURLs.forEach(url => selectedURLIndices.add(url.index));
+    // Update UI
     document.querySelectorAll('.url-checkbox').forEach(cb => cb.checked = true);
     updateURLSelection();
 }
 
 function deselectAllURLs() {
+    // Remove ALL URLs from selection (regardless of page or filter)
+    allURLs.forEach(url => selectedURLIndices.delete(url.index));
+    // Update UI
     document.querySelectorAll('.url-checkbox').forEach(cb => cb.checked = false);
     updateURLSelection();
 }
 
+function selectThisPage() {
+    // Add only currently visible URLs on this page to selection
+    document.querySelectorAll('.url-checkbox').forEach(cb => {
+        cb.checked = true;
+        selectedURLIndices.add(parseInt(cb.value));
+    });
+    updateURLSelection();
+}
+
+function deselectThisPage() {
+    // Remove only currently visible URLs on this page from selection
+    document.querySelectorAll('.url-checkbox').forEach(cb => {
+        cb.checked = false;
+        selectedURLIndices.delete(parseInt(cb.value));
+    });
+    updateURLSelection();
+}
+
 function updateURLSelection() {
-    const selectedCount = document.querySelectorAll('.url-checkbox:checked').length;
-    document.getElementById('selectedCount').textContent = selectedCount;
+    // Count based on selectedURLIndices Set, not just visible checkboxes
+    document.getElementById('selectedCount').textContent = selectedURLIndices.size;
 }
 
 function backToFQDNs() {
@@ -333,8 +381,7 @@ function backToFQDNs() {
 
 // Check file size before export
 function checkFileSize() {
-    const selectedIndices = Array.from(document.querySelectorAll('.url-checkbox:checked'))
-        .map(cb => parseInt(cb.value));
+    const selectedIndices = Array.from(selectedURLIndices);
 
     if (selectedIndices.length === 0) {
         showAlert('warning', 'No URLs selected');
@@ -375,8 +422,7 @@ function checkFileSize() {
 
 // Export HAR file
 function exportHAR() {
-    const selectedIndices = Array.from(document.querySelectorAll('.url-checkbox:checked'))
-        .map(cb => parseInt(cb.value));
+    const selectedIndices = Array.from(selectedURLIndices);
 
     if (selectedIndices.length === 0) {
         showAlert('warning', 'Please select at least one URL to export');
@@ -390,36 +436,54 @@ function exportHAR() {
         },
         body: JSON.stringify({
             session_id: sessionId,
+            original_filename: originalFilename,
             selected_indices: selectedIndices
         })
     })
     .then(response => {
-        if (response.ok && response.headers.get('Content-Type') === 'application/json') {
-            // Check if it's a warning response
-            return response.json();
-        } else if (response.ok) {
-            // File download
-            return response.blob().then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'cleaned.har';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                window.URL.revokeObjectURL(url);
-
-                showAlert('success', 'HAR file exported successfully!');
-            });
-        } else {
+        if (!response.ok) {
+            // Error response
             return response.json().then(data => {
                 throw new Error(data.error || 'Export failed');
             });
         }
-    })
-    .then(data => {
-        if (data && data.warning) {
-            showAlert('danger', data.message);
+
+        const contentDisposition = response.headers.get('Content-Disposition');
+
+        // Check if it's a file download (has Content-Disposition header)
+        if (contentDisposition) {
+            // Success - download file
+            let filename = 'cleaned.har';
+
+            // Extract filename from Content-Disposition header
+            const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(contentDisposition);
+            if (matches != null && matches[1]) {
+                filename = matches[1].replace(/['"]/g, '');
+            }
+
+            return response.blob().then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+
+                showAlert('success', `HAR file exported successfully as ${filename}!`);
+            });
+        } else {
+            // Warning response (size exceeds limit) - no Content-Disposition
+            return response.json().then(data => {
+                if (data.warning) {
+                    showAlert('danger', data.message);
+                } else {
+                    throw new Error('Unexpected response format');
+                }
+            });
         }
     })
     .catch(error => {
