@@ -36,12 +36,15 @@ Or simply **double-click `start.bat`** after extracting the files.
 - Check/uncheck domains to keep
 - Click "Next: Review URLs"
 
-### Step 3: Export
-- Review URLs (search, filter, select)
+### Step 3: Review & Export
+- Search and filter URLs
+- Use selection controls:
+  - **Select All / Deselect All** - affects all URLs
+  - **Select this page / Deselect this page** - affects current page only
 - Click "Check File Size" (optional)
 - Click "Export Cleaned HAR"
 
-**Done!** Your cleaned HAR file will download automatically.
+**Done!** Your file downloads as `{original}_cleaned.har`
 
 ---
 

@@ -44,14 +44,17 @@ HAR files typically include:
 
 ## ✨ Features
 
-- **🌐 Web Interface** - User-friendly browser-based UI
+- **🌐 Web Interface** - User-friendly browser-based UI with GitHub-inspired design
 - **📁 Drag & Drop** - Simply drag HAR files into the browser
 - **🔍 Domain Filtering** - Select which FQDNs to keep
 - **📊 Size Analysis** - View size per domain and per URL
-- **🔎 URL Search** - Filter URLs by keyword
+- **🔎 URL Search** - Filter URLs by keyword with persistent selection
 - **📄 Pagination** - Handle large HAR files efficiently (50/100/200/All per page)
+- **🎯 Smart Selection** - Global and page-level selection controls
+- **📈 Live Statistics** - Real-time counters for selected, total, and visible URLs
 - **✂️ Smart Cleaning** - Automatically removes response bodies
 - **⚠️ Size Warnings** - Alerts when file exceeds 20MB
+- **📦 Automatic Cleanup** - Removes temporary files older than 24 hours
 - **💻 Cross-Platform** - Works on Windows, macOS, and Linux
 
 ---
@@ -170,16 +173,20 @@ The tool will analyze the file and extract all domains.
 - All URLs from selected domains are listed, sorted by size (largest first)
 - **Search**: Use the search box to filter URLs by keyword
 - **Pagination**: Choose to show 50, 100, 200, or all URLs per page
-- **Select/Deselect**: Choose which URLs to include (default: all selected)
-- **Check File Size**: Click to see the estimated output file size
-- Click **Export Cleaned HAR** when ready
+- **Selection Controls**:
+  - **Select All / Deselect All**: Affects all URLs regardless of current page or filter
+  - **Select this page / Deselect this page**: Only affects URLs currently visible on the page
+- **Statistics**: View selected URLs count, total URLs count, and URLs in current page
+- **Check File Size**: Click to see the estimated output file size before download
+- **Export Cleaned HAR**: Download the cleaned file (appends `_cleaned` to original filename)
+- **Back**: Click the Back button in the header to return to domain selection
 
 ### Step 4: Export
 
-- The tool will check if the file size exceeds 20MB
-- **If under 20MB**: File downloads automatically
-- **If over 20MB**: Warning message appears - go back and deselect more URLs
-- Save the `cleaned.har` file to your desired location
+- The tool automatically checks if the file size exceeds 20MB
+- **If under 20MB**: File downloads automatically with `_cleaned.har` suffix (e.g., `test.har` → `test_cleaned.har`)
+- **If over 20MB**: Warning message appears - deselect more URLs and try again
+- Save the cleaned file to your desired location and upload to Invicti
 
 ---
 
