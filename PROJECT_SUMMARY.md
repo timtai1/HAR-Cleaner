@@ -104,12 +104,12 @@ HAR_cleaner/
 
 **macOS/Linux:**
 ```bash
-git clone <your-repo> && cd HAR_cleaner && ./start.sh
+git clone <your-repo> && cd HAR-Cleaner && ./start.sh
 ```
 
 **Windows:**
 ```cmd
-git clone <your-repo> && cd HAR_cleaner && start.bat
+git clone <your-repo> && cd HAR-Cleaner && start.bat
 ```
 
 瀏覽器會自動開啟 `http://127.0.0.1:5000`
@@ -137,7 +137,7 @@ git clone <your-repo> && cd HAR_cleaner && start.bat
 ### 發布前檢查清單
 
 1. **更新 README.md**
-   - 將 `https://github.com/yourusername/HAR_cleaner.git` 替換為實際 repo URL
+   - 將 `https://github.com/timtai1/HAR-Cleaner.git` 替換為實際 repo URL
 
 2. **測試所有功能**
    - 使用 `example.har` 測試完整流程

@@ -42,8 +42,8 @@ Feature requests are welcome! Please include:
 ### Setup
 
 ```bash
-git clone https://github.com/yourusername/HAR_cleaner.git
-cd HAR_cleaner
+git clone https://github.com/timtai1/HAR-Cleaner.git
+cd HAR-Cleaner
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt

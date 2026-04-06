@@ -7,8 +7,8 @@
 1. Open Terminal
 2. Run:
 ```bash
-git clone https://github.com/yourusername/HAR_cleaner.git
-cd HAR_cleaner
+git clone https://github.com/timtai1/HAR-Cleaner.git
+cd HAR-Cleaner
 ./start.sh
 ```
 
@@ -17,8 +17,8 @@ cd HAR_cleaner
 1. Open Command Prompt
 2. Run:
 ```cmd
-git clone https://github.com/yourusername/HAR_cleaner.git
-cd HAR_cleaner
+git clone https://github.com/timtai1/HAR-Cleaner.git
+cd HAR-Cleaner
 start.bat
 ```
 

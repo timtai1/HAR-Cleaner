@@ -71,16 +71,16 @@ Simply double-click or run:
 
 **macOS/Linux:**
 ```bash
-git clone https://github.com/yourusername/HAR_cleaner.git
-cd HAR_cleaner
+git clone https://github.com/timtai1/HAR-Cleaner.git
+cd HAR-Cleaner
 ./start.sh
 ```
 
 **Windows:**
 - Double-click `start.bat`, or run in Command Prompt:
 ```cmd
-git clone https://github.com/yourusername/HAR_cleaner.git
-cd HAR_cleaner
+git clone https://github.com/timtai1/HAR-Cleaner.git
+cd HAR-Cleaner
 start.bat
 ```
 
@@ -89,19 +89,19 @@ start.bat
 **On macOS/Linux:**
 
 ```bash
-git clone https://github.com/yourusername/HAR_cleaner.git && cd HAR_cleaner && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt && python run.py
+git clone https://github.com/timtai1/HAR-Cleaner.git && cd HAR-Cleaner && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt && python run.py
 ```
 
 **On Windows (PowerShell):**
 
 ```powershell
-git clone https://github.com/yourusername/HAR_cleaner.git; cd HAR_cleaner; python -m venv venv; .\venv\Scripts\Activate.ps1; pip install -r requirements.txt; python run.py
+git clone https://github.com/timtai1/HAR-Cleaner.git; cd HAR-Cleaner; python -m venv venv; .\venv\Scripts\Activate.ps1; pip install -r requirements.txt; python run.py
 ```
 
 **On Windows (Command Prompt):**
 
 ```cmd
-git clone https://github.com/yourusername/HAR_cleaner.git && cd HAR_cleaner && python -m venv venv && venv\Scripts\activate && pip install -r requirements.txt && python run.py
+git clone https://github.com/timtai1/HAR-Cleaner.git && cd HAR-Cleaner && python -m venv venv && venv\Scripts\activate && pip install -r requirements.txt && python run.py
 ```
 
 The browser will open automatically at `http://127.0.0.1:5000`
@@ -113,8 +113,8 @@ The browser will open automatically at `http://127.0.0.1:5000`
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/HAR_cleaner.git
-cd HAR_cleaner
+git clone https://github.com/timtai1/HAR-Cleaner.git
+cd HAR-Cleaner
 ```
 
 ### Step 2: Install Dependencies
@@ -323,6 +323,6 @@ This tool is provided as-is for preparing HAR files for web application scanning
 
 **Made with ❤️ for the security community**
 
-[Report Bug](https://github.com/yourusername/HAR_cleaner/issues) · [Request Feature](https://github.com/yourusername/HAR_cleaner/issues)
+[Report Bug](https://github.com/timtai1/HAR-Cleaner/issues) · [Request Feature](https://github.com/timtai1/HAR-Cleaner/issues)
 
 </div>

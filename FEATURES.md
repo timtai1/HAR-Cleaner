@@ -235,4 +235,4 @@ Once you have the cleaned version, securely delete the original HAR file
 - [ ] Cookie/token masking option
 - [ ] Dark mode UI
 
-Suggestions? [Open an issue](https://github.com/yourusername/HAR_cleaner/issues)!
+Suggestions? [Open an issue](https://github.com/timtai1/HAR-Cleaner/issues)!
