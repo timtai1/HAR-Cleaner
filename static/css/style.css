@@ -1,0 +1,258 @@
+/* HAR Cleaner Custom Styles */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* Drop Zone */
+.drop-zone {
+    border: 3px dashed #ccc;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.drop-zone:hover {
+    border-color: #0d6efd;
+    background-color: #e7f1ff;
+}
+
+.drop-zone.drag-over {
+    border-color: #198754;
+    background-color: #d1e7dd;
+    transform: scale(1.02);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.25rem;
+}
+
+/* Step Container */
+.step-container {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FQDN List */
+.fqdn-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.fqdn-item {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+.fqdn-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.fqdn-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.fqdn-item label {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.fqdn-domain {
+    font-weight: 600;
+    color: #0d6efd;
+    font-size: 1.1rem;
+}
+
+.fqdn-stats {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* URL List */
+.url-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.url-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.url-item:hover {
+    background-color: #f8f9fa;
+}
+
+.url-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.url-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.url-text {
+    font-size: 0.9rem;
+    color: #333;
+    word-break: break-all;
+    margin-bottom: 4px;
+}
+
+.url-meta {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.url-size {
+    font-weight: 600;
+    color: #198754;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Method Badges */
+.method-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.method-GET {
+    background-color: #0dcaf0;
+    color: white;
+}
+
+.method-POST {
+    background-color: #198754;
+    color: white;
+}
+
+.method-PUT {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.method-DELETE {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 1rem;
+}
+
+.page-link {
+    cursor: pointer;
+}
+
+/* Loading Spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15rem;
+}
+
+/* Alert Animations */
+.alert {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar Styling */
+.fqdn-list::-webkit-scrollbar,
+.url-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.fqdn-list::-webkit-scrollbar-track,
+.url-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.fqdn-list::-webkit-scrollbar-thumb,
+.url-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.fqdn-list::-webkit-scrollbar-thumb:hover,
+.url-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .url-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .url-size {
+        text-align: left;
+        margin-top: 5px;
+    }
+}
