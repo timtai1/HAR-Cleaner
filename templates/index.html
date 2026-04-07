@@ -98,32 +98,32 @@
                 <div class="card-body">
                     <!-- Controls -->
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-search"></i></span>
                                 <input type="text" id="urlSearch" class="form-control"
-                                       placeholder="Search URLs..." onkeyup="filterURLs()">
+                                       placeholder="Filter..." onkeyup="filterURLs()">
                             </div>
                         </div>
-                        <div class="col-md-6 text-end">
+                        <div class="col-md-8 text-end">
                             <button class="btn btn-sm btn-outline-primary" onclick="selectAllURLs()">
                                 <i class="bi bi-check-all"></i> Select All
                             </button>
                             <button class="btn btn-sm btn-outline-primary" onclick="selectThisPage()">
-                                <i class="bi bi-check-square"></i> Select this page
+                                <i class="bi bi-check-square"></i> This page
                             </button>
                             <button class="btn btn-sm btn-outline-secondary" onclick="deselectThisPage()">
-                                <i class="bi bi-square"></i> Deselect this page
+                                <i class="bi bi-square"></i> This page
                             </button>
                             <button class="btn btn-sm btn-outline-secondary" onclick="deselectAllURLs()">
                                 <i class="bi bi-x-square"></i> Deselect All
                             </button>
-                            <select id="pageSize" class="form-select form-select-sm d-inline-block w-auto ms-3"
+                            <select id="pageSize" class="form-select form-select-sm d-inline-block w-auto ms-2"
                                     onchange="changePageSize()">
-                                <option value="50">50 per page</option>
-                                <option value="100">100 per page</option>
-                                <option value="200">200 per page</option>
-                                <option value="all">Show All</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="all">All</option>
                             </select>
                         </div>
                     </div>
