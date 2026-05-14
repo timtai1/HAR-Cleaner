@@ -13,7 +13,7 @@
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 This tool is specifically designed to prepare HAR (HTTP Archive) files for **Invicti Scanner** by:
 - Removing unnecessary request entries
@@ -21,9 +21,9 @@ This tool is specifically designed to prepare HAR (HTTP Archive) files for **Inv
 - Removing response bodies to reduce file size
 - Ensuring the final file is under 20MB (Invicti's limit)
 
-## 🔒 Security Notice
+## Security Notice
 
-**⚠️ IMPORTANT: HAR files contain sensitive data!**
+**IMPORTANT: HAR files contain sensitive data!**
 
 HAR files typically include:
 - Session cookies
@@ -35,31 +35,31 @@ HAR files typically include:
 **This tool runs 100% locally on your computer. Your HAR files are NOT uploaded to any server.**
 
 **Best practices:**
-1. ✅ Use this tool only on your local machine
-2. ✅ Delete HAR files immediately after use
-3. ✅ Never share HAR files publicly
-4. ✅ Review cleaned HAR files before submitting to Invicti
+1. Use this tool only on your local machine
+2. Delete HAR files immediately after use
+3. Never share HAR files publicly
+4. Review cleaned HAR files before submitting to Invicti
 
 ---
 
-## ✨ Features
+## Features
 
-- **🌐 Web Interface** - User-friendly browser-based UI with GitHub-inspired design
-- **📁 Drag & Drop** - Simply drag HAR files into the browser
-- **🔍 Domain Filtering** - Select which FQDNs to keep
-- **📊 Size Analysis** - View size per domain and per URL
-- **🔎 URL Search** - Filter URLs by keyword with persistent selection
-- **📄 Pagination** - Handle large HAR files efficiently (50/100/200/All per page)
-- **🎯 Smart Selection** - Global and page-level selection controls
-- **📈 Live Statistics** - Real-time counters for selected, total, and visible URLs
-- **✂️ Smart Cleaning** - Automatically removes response bodies
-- **⚠️ Size Warnings** - Alerts when file exceeds 20MB
-- **📦 Automatic Cleanup** - Removes temporary files older than 24 hours
-- **💻 Cross-Platform** - Works on Windows, macOS, and Linux
+- **Web Interface** - User-friendly browser-based UI with GitHub-inspired design
+- **Drag & Drop** - Simply drag HAR files into the browser
+- **Domain Filtering** - Select which FQDNs to keep
+- **Size Analysis** - View size per domain and per URL
+- **URL Search** - Filter URLs by keyword with persistent selection
+- **Pagination** - Handle large HAR files efficiently (50/100/200/All per page)
+- **Smart Selection** - Global and page-level selection controls
+- **Live Statistics** - Real-time counters for selected, total, and visible URLs
+- **Smart Cleaning** - Automatically removes response bodies
+- **Size Warnings** - Alerts when file exceeds 20MB
+- **Automatic Cleanup** - Removes temporary files older than 24 hours
+- **Cross-Platform** - Works on Windows, macOS, and Linux
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -111,7 +111,7 @@ The browser will open automatically at `http://127.0.0.1:5000`
 
 ---
 
-## 📖 Detailed Installation Steps
+## Detailed Installation Steps
 
 ### Step 1: Clone the Repository
 
@@ -149,7 +149,7 @@ The application will:
 
 ---
 
-## 📋 How to Use
+## How to Use
 
 ### Step 1: Upload HAR File
 
@@ -184,13 +184,13 @@ The tool will analyze the file and extract all domains.
 ### Step 4: Export
 
 - The tool automatically checks if the file size exceeds 20MB
-- **If under 20MB**: File downloads automatically with `_cleaned.har` suffix (e.g., `test.har` → `test_cleaned.har`)
+- **If under 20MB**: File downloads automatically with `_cleaned.har` suffix (e.g., `test.har` -> `test_cleaned.har`)
 - **If over 20MB**: Warning message appears - deselect more URLs and try again
 - Save the cleaned file to your desired location and upload to Invicti
 
 ---
 
-## 🛠️ Command-Line Version (Legacy)
+## Command-Line Version (Legacy)
 
 The original CLI version is still available:
 
@@ -207,7 +207,7 @@ python har_cleaner.py input.har -domain example.com,api.example.com
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 HAR_cleaner/
@@ -227,7 +227,7 @@ HAR_cleaner/
 
 ---
 
-## ⚙️ Technical Details
+## Technical Details
 
 ### How It Works
 
@@ -250,7 +250,7 @@ Invicti Scanner has a **20MB file upload limit**. This tool helps ensure your HA
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Port 5000 Already in Use
 
@@ -284,7 +284,7 @@ app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please:
 
@@ -296,13 +296,13 @@ Contributions are welcome! Please:
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built specifically for **Invicti Web Application Scanner**
 - Inspired by the need for better HAR file management
@@ -310,17 +310,17 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-## 📞 Support
+## Support
 
 If you encounter issues or have questions:
 
-1. Check the [Troubleshooting](#-troubleshooting) section
+1. Check the [Troubleshooting](#troubleshooting) section
 2. Open an issue on GitHub
 3. Review existing issues for solutions
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This tool is provided as-is for preparing HAR files for web application scanning. Always ensure you have proper authorization before scanning web applications. The authors are not responsible for misuse of this tool.
 
@@ -328,7 +328,7 @@ This tool is provided as-is for preparing HAR files for web application scanning
 
 <div align="center">
 
-**Made with ❤️ for the security community**
+**Made for the security community**
 
 [Report Bug](https://github.com/timtai1/HAR-Cleaner/issues) · [Request Feature](https://github.com/timtai1/HAR-Cleaner/issues)
 

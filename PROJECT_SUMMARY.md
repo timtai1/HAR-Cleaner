@@ -2,7 +2,7 @@
 
 ## 已完成功能
 
-### ✅ 核心功能
+### 核心功能
 - **Web 介面**：使用 Flask + Bootstrap 5 建立的現代化 UI
 - **拖曳上傳**：支援拖放 HAR 檔案上傳
 - **FQDN 分析**：自動提取並分組所有域名
@@ -13,13 +13,13 @@
 - **自動清理**：自動移除 response body
 - **20MB 警告**：超過 Invicti 限制時警告
 
-### ✅ 跨平台支援
+### 跨平台支援
 - **Windows**：start.bat 一鍵啟動
 - **macOS**：start.sh 一鍵啟動
 - **Linux**：start.sh 一鍵啟動
 - **自動開啟瀏覽器**：run.py 自動啟動並開啟瀏覽器
 
-### ✅ 文件完整
+### 文件完整
 1. **README.md** - 完整使用說明
 2. **QUICK_START.md** - 快速上手指南
 3. **FEATURES.md** - 功能與使用案例
@@ -27,8 +27,8 @@
 5. **LICENSE** - MIT 授權
 6. **example.har** - 測試用範例檔案
 
-### ✅ 安全性考量
-- 100% 本地運行，不上傳任何資料
+### 安全性考量
+- 100% 本地運行,不上傳任何資料
 - 自動清理暫存檔案
 - 警告使用者 HAR 包含敏感資料
 - .gitignore 防止意外提交 HAR 檔案
@@ -74,11 +74,11 @@ HAR_cleaner/
 - **Vanilla JavaScript** - 前端邏輯（無額外框架）
 
 ### 優點
-- ✅ 輕量級，啟動快速
-- ✅ 零配置，開箱即用
-- ✅ 跨平台相容
-- ✅ 不需要 Node.js 或其他工具
-- ✅ 易於部署和分享
+- 輕量級,啟動快速
+- 零配置,開箱即用
+- 跨平台相容
+- 不需要 Node.js 或其他工具
+- 易於部署和分享
 
 ## 使用流程
 
@@ -116,7 +116,7 @@ git clone <your-repo> && cd HAR-Cleaner && start.bat
 
 ## 測試檢查清單
 
-✅ 已測試功能：
+已測試功能：
 - [x] Flask 應用程式正常啟動
 - [x] HTML 頁面正常顯示
 - [x] Bootstrap CSS 載入正常
@@ -124,7 +124,7 @@ git clone <your-repo> && cd HAR-Cleaner && start.bat
 - [x] 匯出端點 `/export` 正常
 - [x] 大小檢查端點 `/check_size` 正常
 
-⚠️ 需要手動測試：
+需要手動測試：
 - [ ] 拖曳上傳功能
 - [ ] FQDN 選擇功能
 - [ ] URL 搜尋功能
@@ -183,15 +183,15 @@ git clone <your-repo> && cd HAR-Cleaner && start.bat
 ## 注意事項
 
 ### 安全提醒
-- ⚠️ HAR 檔案包含 cookies、tokens、session IDs
-- ⚠️ 提醒使用者使用後刪除 HAR 檔案
-- ⚠️ 不要將 HAR 檔案提交到 Git
+- HAR 檔案包含 cookies、tokens、session IDs
+- 提醒使用者使用後刪除 HAR 檔案
+- 不要將 HAR 檔案提交到 Git
 
 ### 隱私保護
-- ✅ 100% 本地運行
-- ✅ 不連接外部伺服器
-- ✅ 不記錄任何使用者資料
-- ✅ Session 結束後自動清理
+- 100% 本地運行
+- 不連接外部伺服器
+- 不記錄任何使用者資料
+- Session 結束後自動清理
 
 ## 授權
 
@@ -207,6 +207,6 @@ MIT License - 可自由使用、修改、分發
 
 ---
 
-**專案狀態：✅ 完成並可發布**
+**專案狀態：完成並可發布**
 
-所有核心功能已實作完成，文件齊全，可以立即發布到 GitHub 供社群使用。
+所有核心功能已實作完成,文件齊全,可以立即發布到 GitHub 供社群使用。
